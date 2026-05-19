@@ -1,11 +1,20 @@
-import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login";
+import Browser from "./components/Browser";
 
 function App() {
-  return (
-    <div className="App">
-      <p className="font-bold text-xl text-red-700">netflix-gpt</p>
-    </div>
-  );
+  const routeConfig = createBrowserRouter([
+    {
+      path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/browse",
+      element: <Browser />,
+    },
+  ]);
+
+  return <RouterProvider router={routeConfig} />;
 }
 
 export default App;
