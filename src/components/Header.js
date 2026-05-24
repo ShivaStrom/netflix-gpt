@@ -7,20 +7,18 @@ import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
   const navigate = useNavigate();
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
 
   const user = useSelector((store) => store.user);
-  console.log(user);
 
   const handleSignOut = () => {
     signOut(auth)
-      .then(() => {
-      })
+      .then(() => {})
       .catch((error) => {});
   };
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const { uid, email, displayName, photoURL } = user;
         dispatch(
@@ -37,6 +35,8 @@ const Header = () => {
         navigate("/");
       }
     });
+    // unsubscribe onAuthStateChanged while unmounted
+    return () => unSubscribe();
   }, []);
 
   return (
