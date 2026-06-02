@@ -9,6 +9,7 @@ import {
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BG_IMG } from "../utils/constanse";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -56,8 +57,6 @@ const Login = () => {
               // An error occurred
               setErrorMessage(error.message);
             });
-
-          console.log(user);
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -77,7 +76,6 @@ const Login = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-          console.log(errorCode + "-" + errorMessage);
           setErrorMessage(errorCode + "-" + errorMessage);
         });
     }
@@ -91,10 +89,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          alt="bg-img"
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/435e8bb8-7f1b-49cb-8da8-bff997124294/web/IN-en-20260511-TRIFECTA-perspective_ec39852e-0b48-4e8a-b415-dd8376cd83ce_large.jpg"
-        ></img>
+        <img alt="bg-img" src={BG_IMG}></img>
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
